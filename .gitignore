@@ -1,0 +1,5 @@
+.venv/
+.venv
+*.txt
+*.csv
+Trajectories/*.ipynb
