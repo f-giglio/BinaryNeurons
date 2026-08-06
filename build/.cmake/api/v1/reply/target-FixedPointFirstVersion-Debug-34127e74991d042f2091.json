@@ -84,7 +84,7 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "-O3 -DNDEBUG -std=c++20"
+					"fragment" : "-g -std=c++20"
 				},
 				{
 					"backtrace" : 6,
@@ -93,10 +93,6 @@
 				{
 					"backtrace" : 6,
 					"fragment" : "-Wpedantic"
-				},
-				{
-					"backtrace" : 6,
-					"fragment" : "-O3"
 				},
 				{
 					"backtrace" : 5,
@@ -132,7 +128,7 @@
 		"commandFragments" : 
 		[
 			{
-				"fragment" : "-O3 -DNDEBUG",
+				"fragment" : "-g",
 				"role" : "flags"
 			},
 			{

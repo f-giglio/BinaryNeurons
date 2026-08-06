@@ -12,7 +12,7 @@
 
 # =============================================================================
 # Project: BinaryNeurons
-# Configurations: Release
+# Configurations: Debug
 # =============================================================================
 
 #############################################
@@ -24,7 +24,7 @@ ninja_required_version = 1.5
 #############################################
 # Set configuration variable for custom commands.
 
-CONFIGURATION = Release
+CONFIGURATION = Debug
 # =============================================================================
 # Include auxiliary files.
 
@@ -49,10 +49,10 @@ cmake_ninja_workdir = /home/frag7276/Desktop/Projects/Research$ projects/BinaryN
 
 build cmake_object_order_depends_target_FixedPointFirstVersion: phony || .
 
-build CMakeFiles/FixedPointFirstVersion.dir/CompositeClassic/FixedPointFirstVersion.cpp.o: CXX_COMPILER__FixedPointFirstVersion_unscanned_Release /home/frag7276/Desktop/Projects/Research$ projects/BinaryNeurons/CompositeClassic/FixedPointFirstVersion.cpp || cmake_object_order_depends_target_FixedPointFirstVersion
-  CONFIG = Release
+build CMakeFiles/FixedPointFirstVersion.dir/CompositeClassic/FixedPointFirstVersion.cpp.o: CXX_COMPILER__FixedPointFirstVersion_unscanned_Debug /home/frag7276/Desktop/Projects/Research$ projects/BinaryNeurons/CompositeClassic/FixedPointFirstVersion.cpp || cmake_object_order_depends_target_FixedPointFirstVersion
+  CONFIG = Debug
   DEP_FILE = CMakeFiles/FixedPointFirstVersion.dir/CompositeClassic/FixedPointFirstVersion.cpp.o.d
-  FLAGS = -O3 -DNDEBUG -std=c++20 -Wall -Wpedantic -O3 -fopenmp
+  FLAGS = -g -std=c++20 -Wall -Wpedantic -fopenmp
   INCLUDES = -isystem /usr/include/eigen3
   OBJECT_DIR = CMakeFiles/FixedPointFirstVersion.dir
   OBJECT_FILE_DIR = CMakeFiles/FixedPointFirstVersion.dir/CompositeClassic
@@ -66,9 +66,9 @@ build CMakeFiles/FixedPointFirstVersion.dir/CompositeClassic/FixedPointFirstVers
 #############################################
 # Link the executable FixedPointFirstVersion
 
-build FixedPointFirstVersion: CXX_EXECUTABLE_LINKER__FixedPointFirstVersion_Release CMakeFiles/FixedPointFirstVersion.dir/CompositeClassic/FixedPointFirstVersion.cpp.o | /usr/lib/libgomp.so /usr/lib/libpthread.a
-  CONFIG = Release
-  FLAGS = -O3 -DNDEBUG
+build FixedPointFirstVersion: CXX_EXECUTABLE_LINKER__FixedPointFirstVersion_Debug CMakeFiles/FixedPointFirstVersion.dir/CompositeClassic/FixedPointFirstVersion.cpp.o | /usr/lib/libgomp.so /usr/lib/libpthread.a
+  CONFIG = Debug
+  FLAGS = -g
   LINK_LIBRARIES = /usr/lib/libgomp.so  /usr/lib/libpthread.a
   OBJECT_DIR = CMakeFiles/FixedPointFirstVersion.dir
   POST_BUILD = :

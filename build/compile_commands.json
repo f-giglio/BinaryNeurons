@@ -1,7 +1,7 @@
 [
 {
   "directory": "/home/frag7276/Desktop/Projects/Research projects/BinaryNeurons/build",
-  "command": "/usr/bin/g++ -isystem /usr/include/eigen3 -O3 -DNDEBUG -std=c++20 -Wall -Wpedantic -O3 -fopenmp -o CMakeFiles/FixedPointFirstVersion.dir/CompositeClassic/FixedPointFirstVersion.cpp.o -c \"/home/frag7276/Desktop/Projects/Research projects/BinaryNeurons/CompositeClassic/FixedPointFirstVersion.cpp\"",
+  "command": "/usr/bin/g++ -isystem /usr/include/eigen3 -g -std=c++20 -Wall -Wpedantic -fopenmp -o CMakeFiles/FixedPointFirstVersion.dir/CompositeClassic/FixedPointFirstVersion.cpp.o -c \"/home/frag7276/Desktop/Projects/Research projects/BinaryNeurons/CompositeClassic/FixedPointFirstVersion.cpp\"",
   "file": "/home/frag7276/Desktop/Projects/Research projects/BinaryNeurons/CompositeClassic/FixedPointFirstVersion.cpp",
   "output": "/home/frag7276/Desktop/Projects/Research projects/BinaryNeurons/build/CMakeFiles/FixedPointFirstVersion.dir/CompositeClassic/FixedPointFirstVersion.cpp.o"
 }
