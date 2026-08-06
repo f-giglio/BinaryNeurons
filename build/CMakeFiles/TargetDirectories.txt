@@ -1,0 +1,3 @@
+/home/frag7276/Desktop/Projects/Research projects/BinaryNeurons/build/CMakeFiles/FixedPointFirstVersion.dir
+/home/frag7276/Desktop/Projects/Research projects/BinaryNeurons/build/CMakeFiles/edit_cache.dir
+/home/frag7276/Desktop/Projects/Research projects/BinaryNeurons/build/CMakeFiles/rebuild_cache.dir
