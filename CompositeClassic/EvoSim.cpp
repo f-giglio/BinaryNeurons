@@ -18,6 +18,7 @@
 #include <unordered_set>
 #include <array>
 #include <algorithm>
+#include <ncurses.h>
 
 #define N 1000
 #define BestTop 100
@@ -397,82 +398,183 @@ void write_data(const Eigen::MatrixXd& data) {
 	file.close();
 }
 
+void draw(const std::bitset<N>& state)
+{
+    erase();
+    mvprintw(0, 0, "Current State");
+
+    constexpr int rows = 25;
+    constexpr int cols = 40;
+
+    for (int row = 0; row < rows; ++row) {
+        for (int col = 0; col < cols; ++col) {
+
+            const int index = row * cols + col;
+
+            const int y = row + 2;
+            const int x = col * 2;
+
+            if (state[index]) {
+                attron(A_REVERSE);
+                mvaddstr(y, x, "  ");
+                attroff(A_REVERSE);
+            }
+            else {
+                mvaddstr(y, x, "  ");
+            }
+        }
+    }
+
+    mvprintw(
+        rows + 4,
+        0,
+        "SPACE -> Update    Q -> Exit    R -> Randomize"
+    );
+
+    refresh();
+}
 
 // -----------------------------------------------------------------------------
 // MAIN
-int main() {
-	omp_set_num_threads(24);
+int main()
+{
+    double W = 0.1;
+    double k = 100;
+    double eta_w = 1.0;
+    double eta_s = 1.0;
+	int step = 0;
+	bool fixed_point_found = false;
+	bool cycle_found = false;
 
-	int cycles = 100, max_steps = 2000;
+	int fixed_point_step = 0;
+	int cycle_step = 0;
+	int cycle_length = 0;
 
-	double eta_min = 0, eta_max = 1, Incr_eta = 0.05;
+    std::bitset<N> State;
+    Eigen::MatrixXd w;
+    Eigen::MatrixXi w_strong;
 
-	double W_min = 0, W_max = 0.5, Incr_W = 0.05;
-	double k = 100;
+    uint32_t seed = 15123455;
 
-	std::cout << "N: " << N << std::endl;
-	std::cout << "W: " << W_min << " -> " << W_max << std::endl;
-	std::cout << "k: " << k << std::endl;
-	std::cout << "ETA_w: " << eta_min << " -> " << eta_max << std::endl;
-	std::cout << "ETA_s: " << eta_min << " -> " << eta_max << std::endl;
+    std::mt19937 gen(seed);
+    std::uniform_real_distribution<double> ran_u(0.0, 1.0);
+    std::normal_distribution<double> ran_g(0.0, 1.0);
 
-	int steps_N = 1;
-	int steps_W = 11;
-	int steps_k = 1;
-	int steps_eta_w = 21;
-	int steps_eta_s = 21;
-	int total_runs = (int)std::lround(steps_N * steps_W * steps_k * steps_eta_w * steps_eta_s);
+	std::unordered_map<std::bitset<N>, int> visited;
 
-	Eigen::MatrixXd Data;
-	Data.setZero(11, total_runs);
+    init(
+        N,
+        W,
+        k,
+        eta_w,
+        eta_s,
+        State,
+        w,
+        w_strong,
+        gen,
+        ran_u,
+        ran_g
+    );
 
-	#pragma omp parallel for collapse(5) schedule(dynamic)
-	for (int iN = 0; iN < steps_N; iN++) {
-		for (int iW = 0; iW < steps_W; ++iW) {
-			for (int ik = 0; ik < steps_k; ++ik) {
-				for (int iew = 0; iew < steps_eta_w; ++iew) {
-					for (int ies = 0; ies < steps_eta_s; ++ies) {
+    randomize_state(State, ran_u, gen);
 
-						std::bitset<N> State;
-						Eigen::MatrixXd w;
-						Eigen::MatrixXi w_strong;
-						Eigen::VectorXd Record;
-						Eigen::MatrixXd Stability;
+	visited.clear();
+	visited[State] = 0;
+	step = 0;
 
+    initscr();
+    cbreak();
+    noecho();
+    keypad(stdscr, TRUE);
+    curs_set(0);
 
-						//int N = N_min + iN * Incr_N;
-						double W = W_min + iW * Incr_W;
-						//double k = k_min + ik * Incr_k;
-						double eta_w = eta_min + iew * Incr_eta;
-						double eta_s = eta_min + ies * Incr_eta;
+    bool running = true;
 
-						Record.setZero(11);
+    while (running) {
 
+        draw(State);
 
-						uint32_t seed = 151234553u ^ (uint32_t)(iN * 1002003u + iW * 10000019u + ik * 10007u + iew * 101u + ies * 1009u);
-						std::mt19937 gen(seed);
-						std::uniform_real_distribution<double> ran_u(0.0, 1.0);
-						std::normal_distribution<double> ran_g(0.0, 1.0);
+    	mvprintw(
+    	    29, 0,
+    	    "N=%d  W=%.2f  k=%.0f  eta_w=%.2f  eta_s=%.2f  step=%d",
+    	    N, W, k, eta_w, eta_s, step
+    	);
 
-						init(N, W, k, eta_w, eta_s, State, w, w_strong, gen, ran_u, ran_g);
+    	if (fixed_point_found) {
+    	    mvprintw(
+    	        31, 0,
+    	        "FIXED POINT found at step %d",
+    	        fixed_point_step
+    	    );
+    	}
 
-						//write_weights(N, W, k, eta_w, eta_s, w);
-						//write_strong(N, W, k, eta_w, eta_s, w_strong);
+    	if (cycle_found) {
+    	    mvprintw(
+    	        31, 0,
+    	        "CYCLE found at step %d - length %d",
+    	        cycle_step,
+    	        cycle_length
+    	    );
+    	}
 
-						std::unordered_set<std::bitset<N>> FP = converge(N, cycles, W, k, eta_w, eta_s, max_steps, State, w, Record, Stability, ran_u, gen);
-						//write_points(FP);
-						int index = ((((iN * steps_W + iW) * (steps_k) + ik) * steps_eta_w + iew) * steps_eta_s + ies);
-						Data.col(index) = Record;
+    	refresh();
 
-						std::cout << (index + 1) << "/" << total_runs << std::endl;
-						std::cout << "------------------------------------\n" << std::endl;
-					}
-				}
+    	const int key = getch();
+
+        switch (key) {
+
+			case ' ': {
+			    std::bitset<N> previous = State;
+			
+			    update_state(State, w);
+			    step++;
+			
+			    if (State == previous && fixed_point_found == false) {
+			        fixed_point_found = true;
+			        fixed_point_step = step;
+			    }
+			    else {
+			        auto it = visited.find(State);
+				
+			        if (it != visited.end() && cycle_found == false) {
+			            cycle_found = true;
+			            cycle_step = step;
+			            cycle_length = step - it->second;
+			        }
+			        else {
+			            visited[State] = step;
+			        }
+			    }
+			
+			    break;
 			}
-		}
-	}
 
-	write_data(Data);
+			case 'r':
+			case 'R':
+			    randomize_state(State, ran_u, gen);
 
-	std::cout << "\n\n\nTest Ended\n------------------------------------------------------------------------------------------" << std::endl;
+			    visited.clear();
+			    visited[State] = 0;
+
+			    step = 0;
+
+			    fixed_point_found = false;
+			    cycle_found = false;
+
+			    fixed_point_step = 0;
+			    cycle_step = 0;
+			    cycle_length = 0;
+
+			    break;
+
+            case 'q':
+            case 'Q':
+                running = false;
+                break;
+        }
+    }
+
+    endwin();
+
+    return 0;
 }

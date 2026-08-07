@@ -12,7 +12,7 @@
 
 # =============================================================================
 # Project: BinaryNeurons
-# Configurations: Debug
+# Configurations: Release
 # =============================================================================
 
 #############################################
@@ -24,7 +24,7 @@ ninja_required_version = 1.5
 #############################################
 # Set configuration variable for custom commands.
 
-CONFIGURATION = Debug
+CONFIGURATION = Release
 # =============================================================================
 # Include auxiliary files.
 
@@ -39,7 +39,7 @@ include CMakeFiles/rules.ninja
 #############################################
 # Logical path to working directory; prefix for absolute paths.
 
-cmake_ninja_workdir = /home/frag7276/Desktop/Projects/Research$ projects/BinaryNeurons/build/
+cmake_ninja_workdir = /home/frag7276/Desktop/Projects/ResearchProjects/BinaryNeurons/build/
 # =============================================================================
 # Object build statements for EXECUTABLE target FixedPointFirstVersion
 
@@ -49,10 +49,10 @@ cmake_ninja_workdir = /home/frag7276/Desktop/Projects/Research$ projects/BinaryN
 
 build cmake_object_order_depends_target_FixedPointFirstVersion: phony || .
 
-build CMakeFiles/FixedPointFirstVersion.dir/CompositeClassic/FixedPointFirstVersion.cpp.o: CXX_COMPILER__FixedPointFirstVersion_unscanned_Debug /home/frag7276/Desktop/Projects/Research$ projects/BinaryNeurons/CompositeClassic/FixedPointFirstVersion.cpp || cmake_object_order_depends_target_FixedPointFirstVersion
-  CONFIG = Debug
+build CMakeFiles/FixedPointFirstVersion.dir/CompositeClassic/FixedPointFirstVersion.cpp.o: CXX_COMPILER__FixedPointFirstVersion_unscanned_Release /home/frag7276/Desktop/Projects/ResearchProjects/BinaryNeurons/CompositeClassic/FixedPointFirstVersion.cpp || cmake_object_order_depends_target_FixedPointFirstVersion
+  CONFIG = Release
   DEP_FILE = CMakeFiles/FixedPointFirstVersion.dir/CompositeClassic/FixedPointFirstVersion.cpp.o.d
-  FLAGS = -g -std=c++20 -Wall -Wpedantic -fopenmp
+  FLAGS = -O3 -DNDEBUG -std=c++20 -Wall -Wextra -Wpedantic -O3 -fopenmp
   INCLUDES = -isystem /usr/include/eigen3
   OBJECT_DIR = CMakeFiles/FixedPointFirstVersion.dir
   OBJECT_FILE_DIR = CMakeFiles/FixedPointFirstVersion.dir/CompositeClassic
@@ -66,9 +66,9 @@ build CMakeFiles/FixedPointFirstVersion.dir/CompositeClassic/FixedPointFirstVers
 #############################################
 # Link the executable FixedPointFirstVersion
 
-build FixedPointFirstVersion: CXX_EXECUTABLE_LINKER__FixedPointFirstVersion_Debug CMakeFiles/FixedPointFirstVersion.dir/CompositeClassic/FixedPointFirstVersion.cpp.o | /usr/lib/libgomp.so /usr/lib/libpthread.a
-  CONFIG = Debug
-  FLAGS = -g
+build FixedPointFirstVersion: CXX_EXECUTABLE_LINKER__FixedPointFirstVersion_Release CMakeFiles/FixedPointFirstVersion.dir/CompositeClassic/FixedPointFirstVersion.cpp.o | /usr/lib/libgomp.so /usr/lib/libpthread.a
+  CONFIG = Release
+  FLAGS = -O3 -DNDEBUG
   LINK_LIBRARIES = /usr/lib/libgomp.so  /usr/lib/libpthread.a
   OBJECT_DIR = CMakeFiles/FixedPointFirstVersion.dir
   POST_BUILD = :
@@ -77,12 +77,49 @@ build FixedPointFirstVersion: CXX_EXECUTABLE_LINKER__FixedPointFirstVersion_Debu
   TARGET_PDB = FixedPointFirstVersion.dbg
   TARGET_SUPPORT_DIR = CMakeFiles/FixedPointFirstVersion.dir
 
+# =============================================================================
+# Object build statements for EXECUTABLE target EvoSim
+
+
+#############################################
+# Order-only phony target for EvoSim
+
+build cmake_object_order_depends_target_EvoSim: phony || .
+
+build CMakeFiles/EvoSim.dir/CompositeClassic/EvoSim.cpp.o: CXX_COMPILER__EvoSim_unscanned_Release /home/frag7276/Desktop/Projects/ResearchProjects/BinaryNeurons/CompositeClassic/EvoSim.cpp || cmake_object_order_depends_target_EvoSim
+  CONFIG = Release
+  DEP_FILE = CMakeFiles/EvoSim.dir/CompositeClassic/EvoSim.cpp.o.d
+  FLAGS = -O3 -DNDEBUG -std=c++20 -Wall -Wextra -Wpedantic -O3 -fopenmp
+  INCLUDES = -isystem /usr/include/eigen3
+  OBJECT_DIR = CMakeFiles/EvoSim.dir
+  OBJECT_FILE_DIR = CMakeFiles/EvoSim.dir/CompositeClassic
+  TARGET_SUPPORT_DIR = CMakeFiles/EvoSim.dir
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target EvoSim
+
+
+#############################################
+# Link the executable EvoSim
+
+build EvoSim: CXX_EXECUTABLE_LINKER__EvoSim_Release CMakeFiles/EvoSim.dir/CompositeClassic/EvoSim.cpp.o | /usr/lib/libcurses.so /usr/lib/libform.so /usr/lib/libgomp.so /usr/lib/libpthread.a
+  CONFIG = Release
+  FLAGS = -O3 -DNDEBUG
+  LINK_LIBRARIES = -lcurses  -lform  /usr/lib/libgomp.so  /usr/lib/libpthread.a
+  OBJECT_DIR = CMakeFiles/EvoSim.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = EvoSim
+  TARGET_PDB = EvoSim.dbg
+  TARGET_SUPPORT_DIR = CMakeFiles/EvoSim.dir
+
 
 #############################################
 # Utility command for edit_cache
 
 build CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cd "/home/frag7276/Desktop/Projects/Research projects/BinaryNeurons/build" && /usr/bin/ccmake -S"/home/frag7276/Desktop/Projects/Research projects/BinaryNeurons" -B"/home/frag7276/Desktop/Projects/Research projects/BinaryNeurons/build"
+  COMMAND = cd /home/frag7276/Desktop/Projects/ResearchProjects/BinaryNeurons/build && /usr/bin/ccmake -S/home/frag7276/Desktop/Projects/ResearchProjects/BinaryNeurons -B/home/frag7276/Desktop/Projects/ResearchProjects/BinaryNeurons/build
   DESC = Running CMake cache editor...
   pool = console
   restat = 1
@@ -94,7 +131,7 @@ build edit_cache: phony CMakeFiles/edit_cache.util
 # Utility command for rebuild_cache
 
 build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cd "/home/frag7276/Desktop/Projects/Research projects/BinaryNeurons/build" && /usr/bin/cmake --regenerate-during-build -S"/home/frag7276/Desktop/Projects/Research projects/BinaryNeurons" -B"/home/frag7276/Desktop/Projects/Research projects/BinaryNeurons/build"
+  COMMAND = cd /home/frag7276/Desktop/Projects/ResearchProjects/BinaryNeurons/build && /usr/bin/cmake --regenerate-during-build -S/home/frag7276/Desktop/Projects/ResearchProjects/BinaryNeurons -B/home/frag7276/Desktop/Projects/ResearchProjects/BinaryNeurons/build
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -110,9 +147,9 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 # =============================================================================
 
 #############################################
-# Folder: /home/frag7276/Desktop/Projects/Research projects/BinaryNeurons/build
+# Folder: /home/frag7276/Desktop/Projects/ResearchProjects/BinaryNeurons/build
 
-build all: phony FixedPointFirstVersion
+build all: phony FixedPointFirstVersion EvoSim
 
 # =============================================================================
 # Built-in targets
@@ -121,14 +158,14 @@ build all: phony FixedPointFirstVersion
 #############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja /home/frag7276/Desktop/Projects/Research$ projects/BinaryNeurons/build/cmake_install.cmake: RERUN_CMAKE | /home/frag7276/Desktop/Projects/Research$ projects/BinaryNeurons/CMakeLists.txt /usr/share/cmake/Modules/CMakeCXXInformation.cmake /usr/share/cmake/Modules/CMakeCommonLanguageInclude.cmake /usr/share/cmake/Modules/CMakeGenericSystem.cmake /usr/share/cmake/Modules/CMakeInitializeConfigs.cmake /usr/share/cmake/Modules/CMakeLanguageInformation.cmake /usr/share/cmake/Modules/CMakeParseImplicitLinkInfo.cmake /usr/share/cmake/Modules/CMakeSystemSpecificInformation.cmake /usr/share/cmake/Modules/CMakeSystemSpecificInitialize.cmake /usr/share/cmake/Modules/Compiler/CMakeCommonCompilerMacros.cmake /usr/share/cmake/Modules/Compiler/GNU-CXX.cmake /usr/share/cmake/Modules/Compiler/GNU.cmake /usr/share/cmake/Modules/FindOpenMP.cmake /usr/share/cmake/Modules/FindPackageHandleStandardArgs.cmake /usr/share/cmake/Modules/FindPackageMessage.cmake /usr/share/cmake/Modules/Internal/CMakeCXXLinkerInformation.cmake /usr/share/cmake/Modules/Internal/CMakeCommonLinkerInformation.cmake /usr/share/cmake/Modules/Platform/Linker/GNU.cmake /usr/share/cmake/Modules/Platform/Linker/Linux-CXX.cmake /usr/share/cmake/Modules/Platform/Linker/Linux-GNU-CXX.cmake /usr/share/cmake/Modules/Platform/Linker/Linux-GNU.cmake /usr/share/cmake/Modules/Platform/Linux-GNU-CXX.cmake /usr/share/cmake/Modules/Platform/Linux-GNU.cmake /usr/share/cmake/Modules/Platform/Linux-Initialize.cmake /usr/share/cmake/Modules/Platform/Linux.cmake /usr/share/cmake/Modules/Platform/UnixPaths.cmake /usr/share/eigen3/cmake/Eigen3Config.cmake /usr/share/eigen3/cmake/Eigen3ConfigVersion.cmake /usr/share/eigen3/cmake/Eigen3Targets.cmake CMakeCache.txt CMakeFiles/4.4.2/CMakeCXXCompiler.cmake CMakeFiles/4.4.2/CMakeSystem.cmake
+build build.ninja /home/frag7276/Desktop/Projects/ResearchProjects/BinaryNeurons/build/cmake_install.cmake: RERUN_CMAKE | /home/frag7276/Desktop/Projects/ResearchProjects/BinaryNeurons/CMakeLists.txt /usr/share/cmake/Modules/CMakeCXXInformation.cmake /usr/share/cmake/Modules/CMakeCommonLanguageInclude.cmake /usr/share/cmake/Modules/CMakeGenericSystem.cmake /usr/share/cmake/Modules/CMakeInitializeConfigs.cmake /usr/share/cmake/Modules/CMakeLanguageInformation.cmake /usr/share/cmake/Modules/CMakeParseImplicitLinkInfo.cmake /usr/share/cmake/Modules/CMakeSystemSpecificInformation.cmake /usr/share/cmake/Modules/CMakeSystemSpecificInitialize.cmake /usr/share/cmake/Modules/CheckLibraryExists.cmake /usr/share/cmake/Modules/Compiler/CMakeCommonCompilerMacros.cmake /usr/share/cmake/Modules/Compiler/GNU-CXX.cmake /usr/share/cmake/Modules/Compiler/GNU.cmake /usr/share/cmake/Modules/FindCurses.cmake /usr/share/cmake/Modules/FindOpenMP.cmake /usr/share/cmake/Modules/FindPackageHandleStandardArgs.cmake /usr/share/cmake/Modules/FindPackageMessage.cmake /usr/share/cmake/Modules/FindPkgConfig.cmake /usr/share/cmake/Modules/Internal/CMakeCXXLinkerInformation.cmake /usr/share/cmake/Modules/Internal/CMakeCommonLinkerInformation.cmake /usr/share/cmake/Modules/Internal/CheckCommon.cmake /usr/share/cmake/Modules/Platform/Linker/GNU.cmake /usr/share/cmake/Modules/Platform/Linker/Linux-CXX.cmake /usr/share/cmake/Modules/Platform/Linker/Linux-GNU-CXX.cmake /usr/share/cmake/Modules/Platform/Linker/Linux-GNU.cmake /usr/share/cmake/Modules/Platform/Linux-GNU-CXX.cmake /usr/share/cmake/Modules/Platform/Linux-GNU.cmake /usr/share/cmake/Modules/Platform/Linux-Initialize.cmake /usr/share/cmake/Modules/Platform/Linux.cmake /usr/share/cmake/Modules/Platform/UnixPaths.cmake /usr/share/eigen3/cmake/Eigen3Config.cmake /usr/share/eigen3/cmake/Eigen3ConfigVersion.cmake /usr/share/eigen3/cmake/Eigen3Targets.cmake CMakeCache.txt CMakeFiles/4.4.2/CMakeCXXCompiler.cmake CMakeFiles/4.4.2/CMakeSystem.cmake
   pool = console
 
 
 #############################################
 # A missing CMake input file is not an error.
 
-build /home/frag7276/Desktop/Projects/Research$ projects/BinaryNeurons/CMakeLists.txt /usr/share/cmake/Modules/CMakeCXXInformation.cmake /usr/share/cmake/Modules/CMakeCommonLanguageInclude.cmake /usr/share/cmake/Modules/CMakeGenericSystem.cmake /usr/share/cmake/Modules/CMakeInitializeConfigs.cmake /usr/share/cmake/Modules/CMakeLanguageInformation.cmake /usr/share/cmake/Modules/CMakeParseImplicitLinkInfo.cmake /usr/share/cmake/Modules/CMakeSystemSpecificInformation.cmake /usr/share/cmake/Modules/CMakeSystemSpecificInitialize.cmake /usr/share/cmake/Modules/Compiler/CMakeCommonCompilerMacros.cmake /usr/share/cmake/Modules/Compiler/GNU-CXX.cmake /usr/share/cmake/Modules/Compiler/GNU.cmake /usr/share/cmake/Modules/FindOpenMP.cmake /usr/share/cmake/Modules/FindPackageHandleStandardArgs.cmake /usr/share/cmake/Modules/FindPackageMessage.cmake /usr/share/cmake/Modules/Internal/CMakeCXXLinkerInformation.cmake /usr/share/cmake/Modules/Internal/CMakeCommonLinkerInformation.cmake /usr/share/cmake/Modules/Platform/Linker/GNU.cmake /usr/share/cmake/Modules/Platform/Linker/Linux-CXX.cmake /usr/share/cmake/Modules/Platform/Linker/Linux-GNU-CXX.cmake /usr/share/cmake/Modules/Platform/Linker/Linux-GNU.cmake /usr/share/cmake/Modules/Platform/Linux-GNU-CXX.cmake /usr/share/cmake/Modules/Platform/Linux-GNU.cmake /usr/share/cmake/Modules/Platform/Linux-Initialize.cmake /usr/share/cmake/Modules/Platform/Linux.cmake /usr/share/cmake/Modules/Platform/UnixPaths.cmake /usr/share/eigen3/cmake/Eigen3Config.cmake /usr/share/eigen3/cmake/Eigen3ConfigVersion.cmake /usr/share/eigen3/cmake/Eigen3Targets.cmake CMakeCache.txt CMakeFiles/4.4.2/CMakeCXXCompiler.cmake CMakeFiles/4.4.2/CMakeSystem.cmake: phony
+build /home/frag7276/Desktop/Projects/ResearchProjects/BinaryNeurons/CMakeLists.txt /usr/share/cmake/Modules/CMakeCXXInformation.cmake /usr/share/cmake/Modules/CMakeCommonLanguageInclude.cmake /usr/share/cmake/Modules/CMakeGenericSystem.cmake /usr/share/cmake/Modules/CMakeInitializeConfigs.cmake /usr/share/cmake/Modules/CMakeLanguageInformation.cmake /usr/share/cmake/Modules/CMakeParseImplicitLinkInfo.cmake /usr/share/cmake/Modules/CMakeSystemSpecificInformation.cmake /usr/share/cmake/Modules/CMakeSystemSpecificInitialize.cmake /usr/share/cmake/Modules/CheckLibraryExists.cmake /usr/share/cmake/Modules/Compiler/CMakeCommonCompilerMacros.cmake /usr/share/cmake/Modules/Compiler/GNU-CXX.cmake /usr/share/cmake/Modules/Compiler/GNU.cmake /usr/share/cmake/Modules/FindCurses.cmake /usr/share/cmake/Modules/FindOpenMP.cmake /usr/share/cmake/Modules/FindPackageHandleStandardArgs.cmake /usr/share/cmake/Modules/FindPackageMessage.cmake /usr/share/cmake/Modules/FindPkgConfig.cmake /usr/share/cmake/Modules/Internal/CMakeCXXLinkerInformation.cmake /usr/share/cmake/Modules/Internal/CMakeCommonLinkerInformation.cmake /usr/share/cmake/Modules/Internal/CheckCommon.cmake /usr/share/cmake/Modules/Platform/Linker/GNU.cmake /usr/share/cmake/Modules/Platform/Linker/Linux-CXX.cmake /usr/share/cmake/Modules/Platform/Linker/Linux-GNU-CXX.cmake /usr/share/cmake/Modules/Platform/Linker/Linux-GNU.cmake /usr/share/cmake/Modules/Platform/Linux-GNU-CXX.cmake /usr/share/cmake/Modules/Platform/Linux-GNU.cmake /usr/share/cmake/Modules/Platform/Linux-Initialize.cmake /usr/share/cmake/Modules/Platform/Linux.cmake /usr/share/cmake/Modules/Platform/UnixPaths.cmake /usr/share/eigen3/cmake/Eigen3Config.cmake /usr/share/eigen3/cmake/Eigen3ConfigVersion.cmake /usr/share/eigen3/cmake/Eigen3Targets.cmake CMakeCache.txt CMakeFiles/4.4.2/CMakeCXXCompiler.cmake CMakeFiles/4.4.2/CMakeSystem.cmake: phony
 
 
 #############################################
